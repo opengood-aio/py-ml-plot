@@ -1,0 +1,23 @@
+name: release
+
+on:
+  pull_request:
+    types:
+      - closed
+      - labeled
+    branches:
+      - main
+    paths-ignore:
+      - .github/workflows/*
+      - .gitignore
+      - LICENSE
+      - README.md
+
+jobs:
+  release:
+    uses: opengood-aio/central-workflows/.github/workflows/python-py-pi-release.yml@python
+    with:
+      git-email: ${{ vars.GIT_EMAIL }}
+      git-user: ${{ vars.GIT_USER }}
+    secrets:
+      workflow-token: ${{ secrets.WORKFLOW_TOKEN }}
