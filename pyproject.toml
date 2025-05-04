@@ -5,11 +5,11 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "opengood.py_ml_plot"
 version = "1.0.0.dev1"
-description = "Module containing reusable functions for machine learning visualization plotting"
+description = "Modules containing reusable functions for machine learning visualization plotting"
 authors = [
     { name = "OpenGood", email = "ai@opengood.ai" }
 ]
-requires-python = ">=3.8"
+requires-python = ">=3.13"
 classifiers = [
     "Programming Language :: Python :: 3",
     "License :: OSI Approved :: MIT License",

@@ -2,7 +2,8 @@
 
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](https://raw.githubusercontent.com/opengood-aio/py-ml-plot/master/LICENSE)
 
-Module containing reusable functions for machine learning visualization plotting
+Modules containing reusable functions for machine learning visualization
+plotting
 
 # Setup
 
@@ -29,5 +30,4 @@ python3 -m pip install scikit-learn
 
 ```bash
 python3 -m pip freeze > requirements.txt
-python3 -m pip install -r requirements.txt
 ```
