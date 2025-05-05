@@ -14,7 +14,7 @@ Create Python virtual environment:
 ```bash
 cd ~/workspace/opengood-aio/py-ml-plot/.venv
 python3 -m venv ~/workspace/opengood-aio/py-ml-plot/.venv
-source bin/activate
+source .venv/bin/activate
 ```
 
 ## Install Packages
@@ -29,5 +29,12 @@ python3 -m pip install scikit-learn
 ## Create Requirements File
 
 ```bash
-python3 -m pip freeze > requirements.txt
+pip freeze > requirements.txt
 ```
+
+## Run Tests
+
+```bash
+python -m pytest tests/
+```
+
