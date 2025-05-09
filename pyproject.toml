@@ -28,3 +28,21 @@ dependencies = [
 [project.urls]
 Homepage = "https://github.com/opengood-aio/py-ml-plot"
 Documentation = "https://github.com/opengood-aio/py-ml-plot"
+
+[tool.pytest]
+addopts = "-v --cov=py_ml_plot --cov-fail-under=70"
+python_files = "test_*.py"
+python_functions = "test_*"
+markers = [
+    "slow: mark tests as slow",
+    "smoke: mark tests as smoke tests",
+    "unit: mark tests as unit tests"
+]
+cov_report = "term-missing"
+cov_report_term = "term-missing:skip-covered"
+cov_report_xml = "coverage.xml"
+norecursedirs = [".git", ".tox", ".venv"]
+filterwarnings = "ignore::DeprecationWarning"
+log_cli = true
+log_cli_level = "INFO"
+
