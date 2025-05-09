@@ -16,5 +16,3 @@ on:
 jobs:
   build:
     uses: opengood-aio/central-workflows/.github/workflows/python-codeql-analyze.yml@main
-    with:
-      python-version: 3.13
