@@ -19,5 +19,7 @@ jobs:
     with:
       git-email: ${{ vars.GIT_EMAIL }}
       git-user: ${{ vars.GIT_USER }}
+      git-name: ${{ vars.GIT_NAME }}
     secrets:
+      py-pi-token: ${{ secrets.PY_PI_TOKEN }}
       workflow-token: ${{ secrets.WORKFLOW_TOKEN }}
