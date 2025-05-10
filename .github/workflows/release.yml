@@ -20,6 +20,7 @@ jobs:
       git-email: ${{ vars.GIT_EMAIL }}
       git-user: ${{ vars.GIT_USER }}
     secrets:
+      github-gpg-signing-id: $${{ secrets.GH_GPG_SIGNING_KEY_ID }}
       py-pi-token: ${{ secrets.PY_PI_TOKEN }}
       codecov-token: ${{ secrets.CODECOV_TOKEN }}
       workflow-token: ${{ secrets.WORKFLOW_TOKEN }}
