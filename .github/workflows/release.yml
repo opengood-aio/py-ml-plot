@@ -24,4 +24,3 @@ jobs:
       codecov-token: ${{ secrets.CODECOV_TOKEN }}
       py-pi-token: ${{ secrets.PY_PI_TOKEN }}
       workflow-token: ${{ secrets.WORKFLOW_TOKEN }}
-      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
