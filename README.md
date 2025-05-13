@@ -12,7 +12,62 @@
 Modules containing reusable functions for machine learning visualization
 plotting
 
-# Setup
+## Compatibility
+
+*  Python 3.13 or later
+
+## Setup
+
+### Add Dependency
+
+```bash
+python3 -m pip install opengood.py-ml-plot
+```
+
+**Note:** See *Release* version badge above for latest version.
+
+## Features
+
+### Classification Model Plotting
+
+Display a classification model results visualization:
+
+```python
+import pandas as pd
+from matplotlib.colors import ListedColormap
+from sklearn.linear_model import LogisticRegression
+from sklearn.model_selection import train_test_split
+from sklearn.preprocessing import StandardScaler
+
+from opengood.py_ml_plot import display_classification_plot
+
+dataset = pd.read_csv("data.csv")
+x = dataset.iloc[:, :-1].values
+y = dataset.iloc[:, -1].values
+
+x_train, _, y_train, y_test = train_test_split(x, y, test_size=0.2, random_state=0)
+
+sc = StandardScaler()
+x_train = sc.fit_transform(x_train)
+
+classifier = LogisticRegression(random_state=0)
+classifier.fit(x_train, y_train)
+
+display_classification_plot(
+    x_train,
+    y_train,
+    sc,
+    classifier,
+    ListedColormap(("salmon", "dodgerblue")),
+    "Logistic Regression (Training Set)",
+    "Age",
+    "Estimated Salary",
+)
+```
+
+---
+
+# Development
 
 ## Python Virtual Environment
 
