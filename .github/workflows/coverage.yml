@@ -1,17 +1,9 @@
 name: coverage
 
 on:
-  pull_request:
+  release:
     types:
-      - closed
-      - labeled
-    branches:
-      - main
-    paths-ignore:
-      - .github/workflows/*
-      - .gitignore
-      - LICENSE
-      - README.md
+      - published
 
 jobs:
   coverage:
