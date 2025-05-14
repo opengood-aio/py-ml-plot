@@ -1,0 +1,22 @@
+name: coverage
+
+on:
+  pull_request:
+    types:
+      - closed
+      - labeled
+    branches:
+      - main
+    paths-ignore:
+      - .github/workflows/*
+      - .gitignore
+      - LICENSE
+      - README.md
+
+jobs:
+  coverage:
+    uses: opengood-aio/central-workflows/.github/workflows/python-code-coverage.yml@python
+    with:
+      run-code-coverage: true
+    secrets:
+      codecov-token: ${{ secrets.CODECOV_TOKEN }}
