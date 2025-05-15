@@ -1,9 +1,12 @@
 name: coverage
 
 on:
-  release:
-    types:
-      - published
+  workflow_dispatch:
+    schedule:
+      # Automatically run every Sunday at midnight
+      - cron: '0 0 * * 0'
+    branches:
+      - main
 
 jobs:
   coverage:
