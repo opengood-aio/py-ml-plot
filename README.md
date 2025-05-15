@@ -5,8 +5,8 @@
 [![CodeQL](https://github.com/opengood-aio/py-ml-plot/actions/workflows/codeql.yml/badge.svg)](https://github.com/opengood-aio/py-ml-plot/actions/workflows/codeql.yml)
 [![Codecov](https://codecov.io/gh/opengood-aio/py-ml-plot/graph/badge.svg?token=WX6Er5S6Vj)](https://codecov.io/gh/opengood-aio/py-ml-plot)
 [![Release Version](https://img.shields.io/github/release/opengood-aio/py-ml-plot.svg)](https://github.com/opengood-aio/py-ml-plot/releases/latest)
-[![PyPI](https://img.shields.io/pypi/v/py-ml-plot)](https://pypi.org/project/py-ml-plot/)
-![Python](https://img.shields.io/pypi/pyversions/py-ml-plot)
+[![PyPI](https://img.shields.io/pypi/v/opengood.py-ml-plot)](https://pypi.org/project/opengood.py-ml-plot/)
+![Python](https://img.shields.io/pypi/pyversions/opengood.py-ml-plot)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](https://raw.githubusercontent.com/opengood-aio/py-ml-plot/master/LICENSE)
 
 Modules containing reusable functions for machine learning visualization
