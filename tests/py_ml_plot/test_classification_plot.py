@@ -6,7 +6,7 @@ from sklearn.linear_model import LogisticRegression
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import StandardScaler
 
-from src.py_ml_plot import display_classification_plot
+from src.opengood.py_ml_plot import display_classification_plot
 
 
 def test_display_classification_plot_with_shaded_regions():
