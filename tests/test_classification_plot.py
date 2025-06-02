@@ -6,13 +6,13 @@ from sklearn.linear_model import LogisticRegression
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import StandardScaler
 
-from src.py_ml_plot import display_classification_plot
+from opengood.py_ml_plot import display_classification_plot
 
 
 def test_display_classification_plot_with_shaded_regions():
     """Should display a classification plot with classified regions shaded"""
 
-    resource_path = os.path.join(os.path.dirname(__file__), "../resources", "data.csv")
+    resource_path = os.path.join(os.path.dirname(__file__), "resources", "data.csv")
     dataset = pd.read_csv(resource_path)
     x = dataset.iloc[:, :-1].values
     y = dataset.iloc[:, -1].values

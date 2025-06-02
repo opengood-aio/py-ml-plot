@@ -19,10 +19,10 @@ readme = "README.md"
 license = { file = "LICENSE" }
 
 dependencies = [
-    "matplotlib >= 3.10.1",
-    "numpy >= 2.2.5",
+    "matplotlib >= 3.10.3",
+    "numpy >= 2.3.0rc1",
     "pandas >= 2.2.3",
-    "scikit-learn >= 1.6.1",
+    "scikit-learn >= 1.7.0rc1",
 ]
 
 [project.urls]
@@ -30,7 +30,7 @@ Homepage = "https://github.com/opengood-aio/py-ml-plot"
 Documentation = "https://github.com/opengood-aio/py-ml-plot"
 
 [tool.pytest.ini_options]
-addopts = "tests/ -v --cov=src.py_ml_plot --cov-report=xml --cov-fail-under=70"
+addopts = "tests/ -v --cov=opengood.py_ml_plot --cov-report=xml --cov-fail-under=70"
 python_files = "test_*.py"
 python_functions = "test_*"
 markers = [
