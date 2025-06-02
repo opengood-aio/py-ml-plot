@@ -30,7 +30,7 @@ Homepage = "https://github.com/opengood-aio/py-ml-plot"
 Documentation = "https://github.com/opengood-aio/py-ml-plot"
 
 [tool.pytest.ini_options]
-addopts = "tests/ -v --cov=opengood.py_ml_plot --cov-report=xml --cov-fail-under=70"
+addopts = "tests/ -v --cov=src.opengood.py_ml_plot --cov-report=xml --cov-fail-under=70"
 python_files = "test_*.py"
 python_functions = "test_*"
 markers = [
