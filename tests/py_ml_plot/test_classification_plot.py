@@ -16,7 +16,9 @@ from src.opengood.py_ml_plot import setup_classification_plot
 class TestClassificationPlot(TestCase):
     def test_logistic_regression_setup_classification_plot_with_shaded_regions(self):
         """Should set up a Logistic regression classification plot with classified regions shaded."""
-        resource_path = os.path.join(os.path.dirname(__file__), "../resources", "data.csv")
+        resource_path = os.path.join(
+            os.path.dirname(__file__), "../resources", "data.csv"
+        )
         dataset = pd.read_csv(resource_path)
 
         x = dataset.iloc[:, :-1].values
@@ -49,17 +51,21 @@ class TestClassificationPlot(TestCase):
         assert plt.gcf() is not None, "Classification plot should be created"
 
         axes = plt.gca()
-        assert len(axes.collections) > 0, "Classification plot should contain shaded regions"
-        assert (
-            axes.get_title() == "Logistic Regression"
-        ), "Classification plot title should be set"
-        assert axes.get_xlabel() == "Age", "Classification plot x-axis label should be set"
-        assert (
-            axes.get_ylabel() == "Estimated Salary"
-        ), "Classification plot y-axis label should be set"
-        assert (
-            len(axes.collections) > 0 or len(axes.lines) > 0
-        ), "Classification plot should contain either decision boundary lines or shaded regions"
+        assert len(axes.collections) > 0, (
+            "Classification plot should contain shaded regions"
+        )
+        assert axes.get_title() == "Logistic Regression", (
+            "Classification plot title should be set"
+        )
+        assert axes.get_xlabel() == "Age", (
+            "Classification plot x-axis label should be set"
+        )
+        assert axes.get_ylabel() == "Estimated Salary", (
+            "Classification plot y-axis label should be set"
+        )
+        assert len(axes.collections) > 0 or len(axes.lines) > 0, (
+            "Classification plot should contain either decision boundary lines or shaded regions"
+        )
 
         plt.show()
         plt.close()
@@ -69,7 +75,9 @@ class TestClassificationPlot(TestCase):
     @skip(reason="Long running test, only used for local tests")
     def test_k_nearest_neighbor_setup_classification_plot_with_shaded_regions(self):
         """Should set up a K-Nearest Neighbor classification plot with classified regions shaded."""
-        resource_path = os.path.join(os.path.dirname(__file__), "../resources", "data.csv")
+        resource_path = os.path.join(
+            os.path.dirname(__file__), "../resources", "data.csv"
+        )
         dataset = pd.read_csv(resource_path)
 
         x = dataset.iloc[:, :-1].values
@@ -102,17 +110,21 @@ class TestClassificationPlot(TestCase):
         assert plt.gcf() is not None, "Classification plot should be created"
 
         axes = plt.gca()
-        assert len(axes.collections) > 0, "Classification plot should contain shaded regions"
-        assert (
-            axes.get_title() == "K-Nearest Neighbor (K-NN)"
-        ), "Classification plot title should be set"
-        assert axes.get_xlabel() == "Age", "Classification plot x-axis label should be set"
-        assert (
-            axes.get_ylabel() == "Estimated Salary"
-        ), "Classification plot y-axis label should be set"
-        assert (
-            len(axes.collections) > 0 or len(axes.lines) > 0
-        ), "Classification plot should contain either decision boundary lines or shaded regions"
+        assert len(axes.collections) > 0, (
+            "Classification plot should contain shaded regions"
+        )
+        assert axes.get_title() == "K-Nearest Neighbor (K-NN)", (
+            "Classification plot title should be set"
+        )
+        assert axes.get_xlabel() == "Age", (
+            "Classification plot x-axis label should be set"
+        )
+        assert axes.get_ylabel() == "Estimated Salary", (
+            "Classification plot y-axis label should be set"
+        )
+        assert len(axes.collections) > 0 or len(axes.lines) > 0, (
+            "Classification plot should contain either decision boundary lines or shaded regions"
+        )
 
         plt.show()
         plt.close()
