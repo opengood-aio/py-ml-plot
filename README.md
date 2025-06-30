@@ -24,31 +24,46 @@ plotting
 python3 -m pip install opengood.py-ml-plot
 ```
 
-**Note:** See *Release* version badge above for latest version.
+**Note:** See *Release* version badge above for the latest version.
+
+---
 
 ## Features
 
 ### Classification Model Plotting
 
-#### Display 2-D Classification Plot
+#### Set Up and Display 2-D Classification Plot
 
-Display a 2-D classification model results visualization:
+Set up a 2-D classification model plot then display its result visualization.
+
+**Notes:**
+
+* The example below uses a dataset to train a logistic regression model then
+  display the plot for the training set
+* For feature scaling, if required, implement the feature scaling logic in the
+  `feature_scaling` lambda
+* For predictions, implement the prediction logic in the `predict` lambda
 
 ```python
+import os
+
+import numpy as np
 import pandas as pd
+from matplotlib import pyplot as plt
 from matplotlib.colors import ListedColormap
 from sklearn.linear_model import LogisticRegression
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import StandardScaler
 
-from opengood.py_ml_plot import display_classification_plot
+from src.opengood.py_ml_plot import setup_classification_plot
 
-dataset = pd.read_csv("data.csv")
+resource_path = os.path.join(os.path.dirname(__file__), "../resources", "data.csv")
+dataset = pd.read_csv(resource_path)
+
 x = dataset.iloc[:, :-1].values
 y = dataset.iloc[:, -1].values
 
-x_train, _, y_train, y_test = train_test_split(x, y, test_size=0.2,
-                                               random_state=0)
+x_train, _, y_train, _ = train_test_split(x, y, test_size=0.2, random_state=0)
 
 sc = StandardScaler()
 x_train = sc.fit_transform(x_train)
@@ -56,46 +71,93 @@ x_train = sc.fit_transform(x_train)
 classifier = LogisticRegression(random_state=0)
 classifier.fit(x_train, y_train)
 
-display_classification_plot(
-    x_train,
-    y_train,
-    sc,
-    classifier,
-    ListedColormap(("salmon", "dodgerblue")),
-    "Logistic Regression (Training Set)",
-    "Age",
-    "Estimated Salary",
+setup_classification_plot(
+    x=x_train,
+    y=y_train,
+    cmap=ListedColormap(("salmon", "dodgerblue")),
+    title="Logistic Regression",
+    x_label="Age",
+    y_label="Estimated Salary",
+    feature_scale=lambda x_set, y_set: (
+        sc.inverse_transform(x_set), y_set
+    ),
+    predict=lambda x1, x2: (
+        classifier.predict(
+            sc.transform(
+                np.array([x1.ravel(), x2.ravel()]).T)
+        ).reshape(x1.shape)
+    ),
 )
+
+plt.show()
 ```
 
 ##### Output
 
-![display-classification-plot-visualization.png](docs/images/display-classification-plot-visualization.png)
+![Setup Classification Plot Visualization](https://raw.githubusercontent.com/opengood-aio/py-ml-plot/main/docs/images/display-classification-plot-visualization.png)
+
+---
 
 ##### Visualization Logic
 
-Visualization implementation logic for function `display_classification_plot` is
+###### Feature Scale Lambda Logic
+
+`feature_scale` lambda implementation logic for function
+`setup_classification_plot` is as follows:
+
+* Inverse feature scaling is invoked via a featuring scaling object, such as
+  the `StandardScalar` object `sc` created earlier for feature scaling
+* `x_set` and `y_set` are assigned non-feature scaled values of the matrix of
+  features and the dependent variable
+  * `x_set` values are inverted from their feature-scaled values in `x`
+  * `y_set` values are not inverted and taken directly from `y`
+
+###### Predict Lambda Logic
+
+`predict` lambda implementation logic for function `setup_classification_plot`
+is as follows:
+
+* Classifier object `classifier` method `predict` is invoked
+* Since the values of the reshaped 2D array are not feature scaled, the
+  values are feature scaled via the `transform` method on the `sc`
+  object
+    * This method call is not required for models that do not require feature
+      scaling
+* `ravel` function from the NumPy library is used to flatten a
+  multidimensional array into a one-dimensional array
+  * `x1` and `x2` are flatten into a 1D array via the `ravel` function
+  * They are then combined via the `array` function from the NumPy
+  library into a 2D array
+  * The result is then reshaped via the `reshape` function to match
+  the shape of `x1`
+
+###### Setup Plot Visualization Logic
+
+Visualization implementation logic for function `setup_classification_plot` is
 as follows:
 
 * `ListedColormap` class from the Matplotlib library creates an object that
   generates a colormap visual from a list of colors
-* `x_set` and `y_set` are assigned non-feature scaled values of the matrix of
-  features and dependent variable from the training set using the
-  `StandardScalar` object `feature_scalar` created earlier for feature scaling
-    * `x_set` values are inverted from their feature scaled values in `x`
+* If the `feature_scale` lambda is defined, `x_set` and `y_set` are
+  assigned non-feature scaled values of the matrix of features and the dependent
+  variable from the sets using a feature scaling object, such as the
+  `StandardScalar` object created earlier for feature scaling
+    * `x_set` values are inverted from their feature-scaled values in `x`
     * `y_set` values are not inverted and taken directly from `y`
+* If the `feature_scale` lambda is not defined, `x_set` and `y_set` are
+  assigned the values of `x` and `y`, respectively
 * `meshgrid` function from the NumPy library returns a tuple of coordinate
   matrices from coordinate vectors
-    * 2 sets of matrices (`x1` and `x2`) are returned with coordinate vectors
+    * Two sets of matrices (`x1` and `x2`) are returned with coordinate vectors
     * `x1`
         * `arange` function is called with a defined start and stop interval
             * `x_set[:, 0]` returns all the rows for feature `x1`
             * `start` parameter
-                * Start of interval
+                * Start of an interval
                 * `x_set[:, 0].min()` returns the minimum value for feature `x1`
                 * Value of `10` is subtracted for padding
             * `stop` parameter
-                * End of interval
+                * End of an interval
                 * `x_set[:, 0].max()` returns the maximum value for feature `x1`
                 * Value of `10` is added for padding
             * `step` parameter
@@ -105,7 +167,7 @@ as follows:
         * `arange` function is called with a defined start and stop interval
             * `x_set[:, 1]` returns all the rows for feature `x2`
             * `start` parameter
-                * Start of interval
+                * Start of an interval
                 * `x_set[:, 1].min()` returns the minimum value for feature `x2`
                 * Value of `1000` is subtracted for padding
                 * Value of `1000` is used instead of `10` due to the difference
@@ -117,6 +179,8 @@ as follows:
             * `step` parameter
                 * Spacing between values
                 * Value of `0.25` is added for spacing
+* The prediction logic implemented in the `preodict` lambda is executed, and
+  the result is assigned to `y_pred`, containing the predictions
 * `contourf` function from the Matplotlib library is used for creating filled
   contour plots
     * It visualizes 3D data in 2D by drawing filled contours representing
