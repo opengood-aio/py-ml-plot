@@ -94,7 +94,7 @@ plt.show()
 
 ##### Output
 
-![Setup Classification Plot Visualization](https://raw.githubusercontent.com/opengood-aio/py-ml-plot/main/docs/images/display-classification-plot-visualization.png)
+![Setup Classification Plot Visualization](https://raw.githubusercontent.com/opengood-aio/py-ml-plot/main/docs/images/setup-classification-plot-visualization.png)
 
 ---
 
