@@ -12,10 +12,10 @@ from sklearn.preprocessing import StandardScaler
 
 from src.opengood.py_ml_plot import setup_classification_plot
 
+
 class TestClassificationPlot(TestCase):
     def test_logistic_regression_setup_classification_plot_with_shaded_regions(self):
-        """Should set up a Logistic regression classification plot with classified regions shaded"""
-
+        """Should set up a Logistic regression classification plot with classified regions shaded."""
         resource_path = os.path.join(os.path.dirname(__file__), "../resources", "data.csv")
         dataset = pd.read_csv(resource_path)
 
@@ -37,11 +37,11 @@ class TestClassificationPlot(TestCase):
             title="Logistic Regression",
             x_label="Age",
             y_label="Estimated Salary",
-            feature_scale=lambda x_set, y_set: (
-                sc.inverse_transform(x_set), y_set
-            ),
+            feature_scale=lambda x_set, y_set: (sc.inverse_transform(x_set), y_set),
             predict=lambda x1, x2: (
-                classifier.predict(sc.transform(np.array([x1.ravel(), x2.ravel()]).T)).reshape(x1.shape)
+                classifier.predict(
+                    sc.transform(np.array([x1.ravel(), x2.ravel()]).T)
+                ).reshape(x1.shape)
             ),
         )
 
@@ -50,10 +50,16 @@ class TestClassificationPlot(TestCase):
 
         axes = plt.gca()
         assert len(axes.collections) > 0, "Classification plot should contain shaded regions"
-        assert axes.get_title() == "Logistic Regression", "Classification plot title should be set"
+        assert (
+            axes.get_title() == "Logistic Regression"
+        ), "Classification plot title should be set"
         assert axes.get_xlabel() == "Age", "Classification plot x-axis label should be set"
-        assert axes.get_ylabel() == "Estimated Salary", "Classification plot y-axis label should be set"
-        assert len(axes.collections) > 0 or len(axes.lines) > 0, "Classification plot should contain either decision boundary lines or shaded regions"
+        assert (
+            axes.get_ylabel() == "Estimated Salary"
+        ), "Classification plot y-axis label should be set"
+        assert (
+            len(axes.collections) > 0 or len(axes.lines) > 0
+        ), "Classification plot should contain either decision boundary lines or shaded regions"
 
         plt.show()
         plt.close()
@@ -62,10 +68,7 @@ class TestClassificationPlot(TestCase):
 
     @skip(reason="Long running test, only used for local tests")
     def test_k_nearest_neighbor_setup_classification_plot_with_shaded_regions(self):
-        """Should set up a K-Nearest Neighbor classification plot with classified regions shaded"""
-
-        pass
-
+        """Should set up a K-Nearest Neighbor classification plot with classified regions shaded."""
         resource_path = os.path.join(os.path.dirname(__file__), "../resources", "data.csv")
         dataset = pd.read_csv(resource_path)
 
@@ -77,7 +80,7 @@ class TestClassificationPlot(TestCase):
         sc = StandardScaler()
         x_train = sc.fit_transform(x_train)
 
-        classifier = KNeighborsClassifier(n_neighbors=5, metric='minkowski', p=2)
+        classifier = KNeighborsClassifier(n_neighbors=5, metric="minkowski", p=2)
         classifier.fit(x_train, y_train)
 
         result = setup_classification_plot(
@@ -87,11 +90,11 @@ class TestClassificationPlot(TestCase):
             title="K-Nearest Neighbor (K-NN)",
             x_label="Age",
             y_label="Estimated Salary",
-            feature_scale=lambda x_set, y_set: (
-                sc.inverse_transform(x_set), y_set
-            ),
+            feature_scale=lambda x_set, y_set: (sc.inverse_transform(x_set), y_set),
             predict=lambda x1, x2: (
-                classifier.predict(sc.transform(np.array([x1.ravel(), x2.ravel()]).T)).reshape(x1.shape)
+                classifier.predict(
+                    sc.transform(np.array([x1.ravel(), x2.ravel()]).T)
+                ).reshape(x1.shape)
             ),
         )
 
@@ -100,16 +103,22 @@ class TestClassificationPlot(TestCase):
 
         axes = plt.gca()
         assert len(axes.collections) > 0, "Classification plot should contain shaded regions"
-        assert axes.get_title() == "K-Nearest Neighbor (K-NN)", "Classification plot title should be set"
+        assert (
+            axes.get_title() == "K-Nearest Neighbor (K-NN)"
+        ), "Classification plot title should be set"
         assert axes.get_xlabel() == "Age", "Classification plot x-axis label should be set"
-        assert axes.get_ylabel() == "Estimated Salary", "Classification plot y-axis label should be set"
-        assert len(axes.collections) > 0 or len(axes.lines) > 0, "Classification plot should contain either decision boundary lines or shaded regions"
+        assert (
+            axes.get_ylabel() == "Estimated Salary"
+        ), "Classification plot y-axis label should be set"
+        assert (
+            len(axes.collections) > 0 or len(axes.lines) > 0
+        ), "Classification plot should contain either decision boundary lines or shaded regions"
 
         plt.show()
         plt.close()
 
         self.assertIsNotNone(result)
 
-if __name__ == '__main__':
-    main()
 
+if __name__ == "__main__":
+    main()

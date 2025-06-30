@@ -57,30 +57,12 @@ def setup_classification_plot(
         np.arange(start=x_set[:, 1].min() - 1000, stop=x_set[:, 1].max() + 1000, step=0.25),
     )
     y_pred = predict(x1, x2)
-    plt.contourf(
-        x1,
-        x2,
-        y_pred,
-        alpha=0.75,
-        cmap=cmap,
-    )
-    plt.contour(
-        x1,
-        x2,
-        y_pred,
-        colors='black',
-        alpha=0.5,
-        linewidths=0.5
-    )
+    plt.contourf(x1, x2, y_pred, alpha=0.75, cmap=cmap)
+    plt.contour(x1, x2, y_pred, colors="black", alpha=0.5, linewidths=0.5)
     plt.xlim(x1.min(), x1.max())
     plt.ylim(x2.min(), x2.max())
     for i, j in enumerate(np.unique(y_set)):
-        plt.scatter(
-            x_set[y_set == j, 0],
-            x_set[y_set == j, 1],
-            c=cmap.colors[i],
-            label=j
-        )
+        plt.scatter(x_set[y_set == j, 0], x_set[y_set == j, 1], c=cmap.colors[i], label=j)
     plt.title(title)
     plt.xlabel(x_label)
     plt.ylabel(y_label)
