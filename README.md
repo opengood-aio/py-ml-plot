@@ -78,6 +78,10 @@ setup_classification_plot(
     title="Logistic Regression",
     x_label="Age",
     y_label="Estimated Salary",
+    meshgrid={
+        0: {"min": 10, "max": 10, "step": 0.25},
+        1: {"min": 1000, "max": 1000, "step": 0.25},
+    },
     feature_scale=lambda x_set, y_set: (
         sc.inverse_transform(x_set), y_set
     ),
@@ -147,7 +151,8 @@ as follows:
 * If the `feature_scale` lambda is not defined, `x_set` and `y_set` are
   assigned the values of `x` and `y`, respectively
 * `meshgrid` function from the NumPy library returns a tuple of coordinate
-  matrices from coordinate vectors
+  matrices from coordinate vectors (the ranges for each axis are controlled by
+  the `meshgrid` dict parameter passed to `setup_classification_plot`).
     * Two sets of matrices (`x1` and `x2`) are returned with coordinate vectors
     * `x1`
         * `arange` function is called with a defined start and stop interval
