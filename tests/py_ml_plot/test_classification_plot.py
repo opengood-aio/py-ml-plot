@@ -39,6 +39,10 @@ class TestClassificationPlot(TestCase):
             title="Logistic Regression",
             x_label="Age",
             y_label="Estimated Salary",
+            meshgrid={
+                0: {"min": 10, "max": 10, "step": 0.25},
+                1: {"min": 1000, "max": 1000, "step": 0.25},
+            },
             feature_scale=lambda x_set, y_set: (sc.inverse_transform(x_set), y_set),
             predict=lambda x1, x2: (
                 classifier.predict(
@@ -98,6 +102,10 @@ class TestClassificationPlot(TestCase):
             title="K-Nearest Neighbor (K-NN)",
             x_label="Age",
             y_label="Estimated Salary",
+            meshgrid={
+                0: {"min": 10, "max": 10, "step": 0.25},
+                1: {"min": 1000, "max": 1000, "step": 0.25},
+            },
             feature_scale=lambda x_set, y_set: (sc.inverse_transform(x_set), y_set),
             predict=lambda x1, x2: (
                 classifier.predict(
