@@ -140,19 +140,22 @@ is as follows:
 Visualization implementation logic for function `setup_classification_plot` is
 as follows:
 
-* `ListedColormap` class from the Matplotlib library creates an object that
-  generates a colormap visual from a list of colors
+* If the `meshgrid` dict is not defined, a default set of dict attributes are
+  set providing min, max, and step values for each axis:
+    * `0` and `1` are used for the keys
+    * `10` and `1000` are used for `min` and `max` values
+    * `0.25` is used for `step` value
+* If the `feature_scale` lambda is not defined, `x_set` and `y_set` are
+  assigned the values of `x` and `y`, respectively
 * If the `feature_scale` lambda is defined, `x_set` and `y_set` are
   assigned non-feature scaled values of the matrix of features and the dependent
   variable from the sets using a feature scaling object, such as the
   `StandardScalar` object created earlier for feature scaling
     * `x_set` values are inverted from their feature-scaled values in `x`
     * `y_set` values are not inverted and taken directly from `y`
-* If the `feature_scale` lambda is not defined, `x_set` and `y_set` are
-  assigned the values of `x` and `y`, respectively
 * `meshgrid` function from the NumPy library returns a tuple of coordinate
-  matrices from coordinate vectors (the ranges for each axis are controlled by
-  the `meshgrid` dict parameter passed to `setup_classification_plot`).
+  matrices from coordinate vectors
+  * The ranges for each axis are controlled by the `meshgrid` dict parameter
     * Two sets of matrices (`x1` and `x2`) are returned with coordinate vectors
     * `x1`
         * `arange` function is called with a defined start and stop interval
